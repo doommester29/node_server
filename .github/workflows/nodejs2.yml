@@ -36,7 +36,7 @@ jobs:
 
     - name: Run the API and Postman's tests
       run: | 
-        npm run start:dev &
+        npm run start &
         sleep 60
         newman run "api_test.json"
 
