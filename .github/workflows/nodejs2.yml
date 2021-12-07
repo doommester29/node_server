@@ -37,8 +37,16 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: Run the API and Postman's tests
+    - name: Run the Server
       run:
         npm run start
         sleep 30
         newman run api_test.json
+
+    - name: Wait for running server
+      run: sleep 30
+
+    - name: Run API test
+      run:
+        newman run api_test.json
+
