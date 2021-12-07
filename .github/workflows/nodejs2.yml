@@ -39,7 +39,7 @@ jobs:
 
     - name: Run the Server
       run:
-        npm start
+        npm run start:dev
 
     - name: Wait for running server
       run: sleep 30
