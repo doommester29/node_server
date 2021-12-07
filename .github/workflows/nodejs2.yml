@@ -26,6 +26,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Install newman
+      run: npm install -g newman
+
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+    - name: Run the API and Postman's tests
+      run:
+        npm run start
+        newman run api_test.json
