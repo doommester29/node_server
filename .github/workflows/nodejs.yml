@@ -1,33 +1,60 @@
-# name: Node.js CI
-# on: [push, pull_request]
-                         
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [12.x]
+name: Node.js CI
 
-#   steps:
-#   - name: Check out Git repositor
-#     uses: actions/checkout@v1
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-#   - name: Set up Node.js
-#     uses: actions/setup-node@v1
+jobs:
+  build:
 
-#     with:
-#       node-version: ${{ matrix.node-version }}
-#       registry-url: https://registry.npmjs.org/
+    runs-on: ubuntu-latest
 
-#   - name: Install dependencies
-#     run: npm install
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-#   - name: Install newman
-#     run: npm install -g newman
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        registry-url: https://registry.npmjs.org/
+        cache: 'npm'
 
-#   - name: Run the API and Postman's tests
-#     run: | 
-#       npm run start:dev &
-#       sleep 60
-#       newman run "api_test.json"
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install newman
+      run: npm install -g newman
+
+    - name: Run the API and Postman's tests
+      run: | 
+        npm run start &
+        sleep 10
+        newman run "api_test.json"
+    
+    - name: Send email
+      uses: devellany/send-mailer@v1.0.2
+      with:
+        host: smtp.google.com
+          account: ${{secrets.ACCOUNT}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          sender: GitHub System
+          from: ${{secrets.MAIL_ADDRESS}}
+          to: borostamas6@hotmail.com
+          subject: CI ready
+          body: file://README.md
+          contentType: text/html
+          attachments: file://attachmets.json
+
+
+
+
+
