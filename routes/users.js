@@ -4,7 +4,7 @@ import { createUser, getUserInfo, getUserById, deleteUser, modifyUser } from '..
 
 const router = express.Router() // request types
 
-let users = [ // Mock database !!!
+//let users = [ // Mock database !!!
 
 /*   {
         name: "John",
@@ -17,7 +17,7 @@ let users = [ // Mock database !!!
         age: 24
     }
 */
-]
+//]
 
 router.get('/', getUserInfo)
 

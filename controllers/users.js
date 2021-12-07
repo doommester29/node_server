@@ -1,5 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
 
+export let users = []
+
+export const getUserInfo = (req, res) => {
+    res.send(users)
+}
+
 export const createUser = (req, res) => {
     const user = req.body
 
@@ -8,14 +14,10 @@ export const createUser = (req, res) => {
     res.send(`User with the name ${user.firstName} added to the database!`)
 }
 
-export const getUserInfo = (req, res) => {
-    res.send(users)
-}
-
 export const getUserById = (req, res) => {
     const { id } = req.params;
 
-     const foundUser = users.find((user) => user.id == id)
+    const foundUser = users.find((user) => user.id == id)
 
     res.send(req.params)
 }
