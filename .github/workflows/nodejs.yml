@@ -44,7 +44,8 @@ jobs:
     #      subject: Github Actions job result
     #      body: file://README.md
     #      attachments: '[{"path":"README.md"}]'
-    #      to: borostamas6@hotmail.com        
+    #      to: borostamas6@hotmail.com
+    # .git folder inicializálás, hook - feladatok event-hez kötődően, pl: unit teszt futtatás        
 
 
 

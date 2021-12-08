@@ -21,7 +21,7 @@ const router = express.Router() // request types
 
 router.get('/', getUserInfo)
 
-router.post('/', createUser)
+//router.post('/', createUser)
 
 router.get('/:id', getUserById) // /users/2 => req.params { id: 2}
 
