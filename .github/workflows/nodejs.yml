@@ -33,9 +33,9 @@ jobs:
         sleep 10
         newman run "api_test.json"
     
-    release:
-      if: ${{ github.ref == 'main' }}
-      needs: build
+    #release:
+    #  if: ${{ github.ref == 'main' }}
+    #  needs: build
 
     #- name: Send email
     #  uses: devellany/send-mail@v1.0.2
@@ -49,7 +49,9 @@ jobs:
     #      body: file://README.md
     #      attachments: '[{"path":"README.md"}]'
     #      to: borostamas6@hotmail.com
-    # .git folder inicializálás, hook - feladatok event-hez kötődően, pl: unit teszt futtatás        
+    # .git folder inicializálás, hook - feladatok event-hez kötődően, pl: unit teszt futtatás
+    # passed / failed esetén mi történjen ?
+    # heroku         
 
 
 
